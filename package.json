@@ -1,0 +1,12 @@
+{
+  "name": "ratevault",
+  "version": "0.1.0",
+  "description": "A motor insurance quote engine with bitemporal rate tables, so any quote from the last two years reprices to the penny.",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=22.6" },
+  "scripts": {
+    "test": "node --test",
+    "demo": "node src/demo.ts"
+  }
+}
