@@ -2,6 +2,22 @@
 
 > A motor insurance quote engine with bitemporal rate tables, so any quote from the last two years reprices to the penny.
 
+## Live deployment
+
+[![CI and deployment](https://github.com/SlateGitOrg/ratevault/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/SlateGitOrg/ratevault/actions/workflows/ci.yml)
+
+[Open the interactive RateVault demo](https://slategitorg.github.io/ratevault/)
+
+The deployed interface uses a deterministic offline scenario to make the repository's tested decision rule visible without external services or private data.
+
+### Desktop
+
+![RateVault desktop deployment](docs/assets/deployed-desktop.png)
+
+### Mobile
+
+<img src="docs/assets/deployed-mobile.png" alt="RateVault mobile deployment" width="390">
+
 `FLAGSHIP` · **Full Stack Engineering** · Expert · ~5-6 weeks · Insurance
 
 **Primary language:** TypeScript
