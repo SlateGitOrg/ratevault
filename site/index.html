@@ -1,1 +1,39 @@
-<!doctype html><html lang="en" class="workflow-board"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Reprice any historical quote to the penny with bitemporal rates."><meta name="theme-color" content="#edf5f4"><title>RateVault — Live demo</title><link rel="stylesheet" href="./styles.css"></head><body><div class="shell"><nav class="topbar" aria-label="Primary"><a class="brand" href="./"><span class="brand-mark">S</span>RateVault</a><a class="repo-link" href="https://github.com/SlateGitOrg/ratevault">View source on GitHub</a></nav><main><header class="hero"><div><p class="kicker">Motor quote audit</p><h1>Reprice any historical quote to the penny with bitemporal rates.</h1></div><div class="hero-side"><p>This interactive browser scenario makes the repository's tested decision rule visible. Adjust the operating condition and inspect what changes.</p><div class="status" role="status"><span class="status-dot" aria-hidden="true"></span>Penny-perfect</div></div></header><section class="visual" aria-label="Interactive project view"><div class="workflow" aria-label="Motor quote audit workflow"><button type="button" class="stage " data-stage="0"><span class="stage-number">1</span><span><strong>Quote received</strong><small>8 items</small></span></button><span class="connector" aria-hidden="true"></span><button type="button" class="stage active" data-stage="1"><span class="stage-number">2</span><span><strong>Rate effective</strong><small>3 items</small></span></button><span class="connector" aria-hidden="true"></span><button type="button" class="stage " data-stage="2"><span class="stage-number">3</span><span><strong>Rate recorded</strong><small>1 items</small></span></button><div class="activity"><span class="activity-dot"></span><p><strong>Latest decision</strong><br><span id="activity-copy">Evidence accepted and moved forward.</span></p><time>Just now</time></div></div></section><aside class="panel"><div class="metric"><strong id="primary-metric" aria-live="polite">£684.20</strong><span>reproduced premium</span></div><div class="control"><label for="scenario-range"><span>Quote age</span><output id="scenario-output" for="scenario-range">14 months</output></label><input id="scenario-range" type="range" min="0" max="24" value="14" aria-label="Quote age"></div><div class="facts"><div class="fact"><strong>£0.00</strong><span>reprice delta</span></div><div class="fact"><strong>2</strong><span>time axes</span></div><div class="fact"><strong>184</strong><span>rate versions</span></div></div></aside><footer class="demo-note"><p>Representative offline scenario. The repository's native test suite verifies the core behavior; this page visualizes its decision path without external services or private data.</p><a href="https://github.com/SlateGitOrg/ratevault#readme">Read the engineering case study</a></footer></main></div><script src="./app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Price a motor risk using the rate effective on the quote date and known at the transaction date.">
+  <title>RateVault · Working Lab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#results">Skip to results</a>
+  <header class="masthead"><a class="brand" href="https://github.com/SlateGitOrg/ratevault">RateVault</a><span class="build-state"><i></i> live computation</span></header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">Bitemporal quote engine</p>
+      <h1>Run the decision,<br><em>inspect the evidence.</em></h1>
+      <p class="lede">Price a motor risk using the rate effective on the quote date and known at the transaction date.</p>
+    </section>
+    <section class="workspace" aria-label="Interactive project workspace">
+      <form id="workspace-form" class="control-panel">
+        <div class="panel-heading"><span>01</span><div><p>Inputs</p><h2>Configure the run</h2></div></div>
+        <div class="fields"><label class="field" for="basePremium"><span>Base premium</span><input id="basePremium" name="basePremium" type="number" value="400" min="1" max="100000" step="any" data-suggested-step="1"></label>
+<label class="field" for="driverAge"><span>Driver age</span><input id="driverAge" name="driverAge" type="number" value="24" min="17" max="100" step="any" data-suggested-step="1"></label>
+<label class="field" for="vehicleValue"><span>Vehicle value</span><input id="vehicleValue" name="vehicleValue" type="number" value="30000" min="1000" max="10000000" step="any" data-suggested-step="1000"></label>
+<label class="field" for="effectiveDate"><span>Quote effective date</span><select id="effectiveDate" name="effectiveDate"><option>2025-01-15</option><option selected>2025-07-15</option><option>2026-01-15</option></select></label>
+<label class="field" for="knownAt"><span>Rates known at</span><select id="knownAt" name="knownAt"><option>2025-02-01</option><option selected>2025-09-01</option><option>2026-02-01</option></select></label>
+<label class="field" for="rates"><span>Bitemporal rate rows as JSON</span><textarea id="rates" name="rates" rows="11">[{&quot;effectiveFrom&quot;:&quot;2025-01-01&quot;,&quot;effectiveTo&quot;:&quot;2026-01-01&quot;,&quot;recordedFrom&quot;:&quot;2025-01-01&quot;,&quot;recordedTo&quot;:&quot;2025-08-01&quot;,&quot;factor&quot;:1.18},{&quot;effectiveFrom&quot;:&quot;2025-01-01&quot;,&quot;effectiveTo&quot;:&quot;2026-01-01&quot;,&quot;recordedFrom&quot;:&quot;2025-08-01&quot;,&quot;recordedTo&quot;:&quot;9999-12-31&quot;,&quot;factor&quot;:1.12},{&quot;effectiveFrom&quot;:&quot;2026-01-01&quot;,&quot;effectiveTo&quot;:&quot;9999-12-31&quot;,&quot;recordedFrom&quot;:&quot;2026-01-01&quot;,&quot;recordedTo&quot;:&quot;9999-12-31&quot;,&quot;factor&quot;:1.08}]</textarea></label></div>
+        <div class="actions"><button class="run" type="submit">Run analysis <span>→</span></button><button id="reset-button" class="reset" type="button">Reset</button></div>
+      </form>
+      <section id="results" class="result-panel" aria-live="polite" aria-busy="true">
+        <div class="panel-heading"><span>02</span><div><p>Output</p><h2>Decision trace</h2></div></div>
+        <div id="result-content" class="result-content"><div class="loading">Computing initial scenario…</div></div>
+      </section>
+    </section>
+  </main>
+  <footer><p>Built from the tested logic in <a href="https://github.com/SlateGitOrg/ratevault">SlateGitOrg/ratevault</a>.</p><p>Interactive capstone · Sneha Chandra</p></footer>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>
